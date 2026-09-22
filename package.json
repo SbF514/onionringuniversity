@@ -12,8 +12,7 @@
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npx serve .",
     "build": "cd shared && npm run build && cd ../server && npm run build",
-    "start": "cd server && node dist/index.js",
-    "postinstall": "cd shared && npm install && cd ../server && npm install"
+    "start": "cd server && node dist/index.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
