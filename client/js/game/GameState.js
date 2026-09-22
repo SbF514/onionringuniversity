@@ -15,16 +15,24 @@ class GameState {
   }
 
   updatePlayer(data) {
-    if (data.id === this.localPlayerId) return; // Don't overwrite local
-    this.players[data.id] = {
-      id: data.id,
-      username: data.username || 'Unknown',
-      position: data.position,
-      velocity: data.velocity || { x: 0, y: 0 },
-      facing: data.facing || 'down',
-      avatar: data.avatar,
-      isMoving: data.isMoving || false,
-    };
+    if (!this.players[data.id]) {
+      this.players[data.id] = {
+        id: data.id,
+        username: 'Unknown',
+        position: { x: 0, y: 0 },
+        velocity: { x: 0, y: 0 },
+        facing: 'down',
+        avatar: null,
+        isMoving: false,
+      };
+    }
+    var p = this.players[data.id];
+    if (data.username) p.username = data.username;
+    if (data.position) p.position = data.position;
+    if (data.velocity) p.velocity = data.velocity;
+    if (data.facing) p.facing = data.facing;
+    if (data.avatar) p.avatar = data.avatar;
+    if (data.isMoving !== undefined) p.isMoving = data.isMoving;
   }
 
   removePlayer(id) {

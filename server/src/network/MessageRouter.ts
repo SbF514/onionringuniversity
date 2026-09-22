@@ -25,7 +25,7 @@ export class MessageRouter {
     ws.playerId = playerId;
     ws.roomId = roomId;
 
-    const players = room.getPlayersInRadius({ x: 0, y: 0 }, Infinity);
+    const players = room.getPlayersInRadius({ x: 0, y: 0 }, Infinity, playerId);
     send({
       type: 'state:full',
       timestamp: Date.now(),
@@ -97,6 +97,6 @@ export class MessageRouter {
       payload: { text: msg.payload.text.slice(0, 200), channel: 'proximity' },
     };
 
-    room.broadcastProximity(chatMsg, player.position, NETWORK.PROXIMITY_RADIUS, playerId);
+    room.broadcast(chatMsg, playerId);
   }
 }
