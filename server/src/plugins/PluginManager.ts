@@ -10,7 +10,7 @@ export class PluginManager {
 
   async loadPlugins(): Promise<void> {
     const pluginDir = join(__dirname);
-    const files = readdirSync(pluginDir).filter(f => f.endsWith('Plugin.ts'));
+    const files = readdirSync(pluginDir).filter(f => f.endsWith('Plugin.js'));
 
     for (const file of files) {
       try {
