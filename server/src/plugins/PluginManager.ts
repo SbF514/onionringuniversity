@@ -1,4 +1,4 @@
-import { ServerPlugin, PluginContext, NetworkMessage, PlayerState, ChatMessage, CommandHandler } from '@shared/index';
+import { ServerPlugin, PluginContext, NetworkMessage, PlayerState, ChatMessage, CommandHandler } from '../shared/index';
 import { RoomManager } from '../rooms/RoomManager';
 import { readdirSync } from 'fs';
 import { join } from 'path';

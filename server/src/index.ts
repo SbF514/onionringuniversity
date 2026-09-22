@@ -5,7 +5,7 @@ import { WebSocketServer } from './network/WebSocketServer';
 import { RoomManager } from './rooms/RoomManager';
 import { LevelManager } from './levels/LevelManager';
 import { PluginManager } from './plugins/PluginManager';
-import { NETWORK } from '@shared/index';
+import { NETWORK } from './shared/index';
 
 const PORT = parseInt(process.env.PORT || '3001', 10);
 

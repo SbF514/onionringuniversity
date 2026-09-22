@@ -2,7 +2,7 @@ import { WebSocketServer as WSServer, WebSocket } from 'ws';
 import { Server } from 'http';
 import { RoomManager } from '../rooms/RoomManager';
 import { PluginManager } from '../plugins/PluginManager';
-import { NetworkMessage, PlayerJoinMessage, PlayerMoveMessage, ChatMessage, NETWORK } from '@shared/index';
+import { NetworkMessage, PlayerJoinMessage, PlayerMoveMessage, ChatMessage, NETWORK } from '../shared/index';
 import { MessageRouter } from './MessageRouter';
 
 interface ClientSocket extends WebSocket {
