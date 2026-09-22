@@ -14,7 +14,9 @@
     var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     var wsHost = window.gameConfig ? window.gameConfig.wsHost : window.location.hostname;
     var wsPort = window.gameConfig ? window.gameConfig.wsPort : '3001';
-    var wsUrl = protocol + '//' + wsHost + ':' + wsPort + '/ws';
+    // Skip default port for wss/https
+    var portStr = (wsPort === '443' && protocol === 'wss:') || (wsPort === '80' && protocol === 'ws:') ? '' : ':' + wsPort;
+    var wsUrl = protocol + '//' + wsHost + portStr + '/ws';
 
     game.start(username, wsUrl);
   }
