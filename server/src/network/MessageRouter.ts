@@ -66,15 +66,13 @@ export class MessageRouter {
 
     const player = this.roomManager.getPlayerManager().getPlayer(playerId);
     if (player) {
-      room.broadcastProximity(
+      room.broadcast(
         {
           type: 'player:update',
           timestamp: Date.now(),
           playerId,
           payload: { position: msg.payload.position, velocity: msg.payload.velocity, facing: msg.payload.facing },
         },
-        player.position,
-        NETWORK.PROXIMITY_RADIUS * 2,
         playerId
       );
     }
