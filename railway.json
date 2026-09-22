@@ -4,7 +4,6 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "cd server && node dist/index.js",
     "healthcheckPath": "/health"
   }
 }
