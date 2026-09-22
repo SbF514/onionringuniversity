@@ -1,4 +1,4 @@
-import { PlayerState, Vec2, NETWORK, PLAYER } from '@school-metaverse/shared';
+import { PlayerState, Vec2, NETWORK, PLAYER } from '@shared/index';
 import { v4 as uuid } from 'uuid';
 
 export class PlayerManager {

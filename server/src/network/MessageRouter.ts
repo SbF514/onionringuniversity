@@ -1,7 +1,7 @@
 import { WebSocket } from 'ws';
 import { RoomManager } from '../rooms/RoomManager';
 import { PluginManager } from '../plugins/PluginManager';
-import { PlayerJoinMessage, PlayerMoveMessage, ChatMessage, NETWORK } from '@school-metaverse/shared';
+import { PlayerJoinMessage, PlayerMoveMessage, ChatMessage, NETWORK } from '@shared/index';
 
 interface ClientSocket extends WebSocket {
   playerId?: string;

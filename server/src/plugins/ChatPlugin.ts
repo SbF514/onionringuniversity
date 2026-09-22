@@ -1,4 +1,4 @@
-import { ServerPlugin, PluginContext, ChatMessage, PlayerState } from '@school-metaverse/shared';
+import { ServerPlugin, PluginContext, ChatMessage, PlayerState } from '@shared/index';
 
 const RATE_LIMIT_WINDOW = 5000;
 const MAX_MESSAGES_PER_WINDOW = 5;

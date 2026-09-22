@@ -1,4 +1,4 @@
-import { PlayerState, LevelEntity, LevelZone, NETWORK, Vec2 } from '@school-metaverse/shared';
+import { PlayerState, LevelEntity, LevelZone, NETWORK, Vec2 } from '@shared/index';
 import { PlayerManager } from '../players/PlayerManager';
 import { LevelManager } from '../levels/LevelManager';
 

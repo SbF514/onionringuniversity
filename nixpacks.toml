@@ -2,10 +2,10 @@
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["npm install"]
+cmds = ["npm install --workspace=server"]
 
 [phases.build]
-cmds = ["cd shared && npx tsc", "cd ../server && npx tsc && cp src/levels/*.json dist/levels/"]
+cmds = ["cd server && npm run build"]
 
 [start]
 cmd = "cd server && node dist/index.js"

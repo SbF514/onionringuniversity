@@ -1,4 +1,4 @@
-import { LevelDefinition, Vec2, LevelZone, LevelEntity } from '@school-metaverse/shared';
+import { LevelDefinition, Vec2, LevelZone, LevelEntity } from '@shared/index';
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 

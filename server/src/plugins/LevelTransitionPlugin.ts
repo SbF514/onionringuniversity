@@ -1,4 +1,4 @@
-import { ServerPlugin, PluginContext, PlayerState } from '@school-metaverse/shared';
+import { ServerPlugin, PluginContext, PlayerState } from '@shared/index';
 import { LevelManager } from '../levels/LevelManager';
 
 export class LevelTransitionPlugin implements ServerPlugin {
