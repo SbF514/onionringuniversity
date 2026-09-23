@@ -4,6 +4,10 @@
   var auth = window.SupabaseAuth;
   var settingsUI = new SettingsUI();
 
+  // Loading screen
+  var loadingScreen = document.getElementById('loading-screen');
+  var loginScreen = document.getElementById('login-screen');
+
   // Auth form elements
   var authForm = document.getElementById('login-form');
   var emailInput = document.getElementById('email-input');
@@ -16,6 +20,7 @@
 
   // Initialize Supabase
   if (!auth.init()) {
+    hideLoading();
     showError('Failed to initialize authentication');
     return;
   }
@@ -71,17 +76,29 @@
       var session = await auth.getSession();
       if (session) {
         await onLoginSuccess();
+      } else {
+        hideLoading();
       }
     } catch (err) {
-      // No session, stay on login screen
+      hideLoading();
     }
   })();
+
+  function hideLoading() {
+    if (loadingScreen) {
+      loadingScreen.style.opacity = '0';
+      setTimeout(function() {
+        loadingScreen.style.display = 'none';
+      }, 300);
+    }
+  }
 
   async function onLoginSuccess() {
     var profile = await auth.ensureProfile();
     var token = await auth.getAccessToken();
 
-    document.getElementById('login-screen').style.display = 'none';
+    loginScreen.style.display = 'none';
+    hideLoading();
     document.getElementById('game-screen').style.display = 'block';
 
     settingsUI.init({
@@ -92,11 +109,11 @@
           game.localPlayer.color = updates.color;
         }
       },
-      logout: async function() {
+      onLogout: async function() {
         await auth.signOut();
         game.stop();
         document.getElementById('game-screen').style.display = 'none';
-        document.getElementById('login-screen').style.display = 'flex';
+        loginScreen.style.display = 'flex';
       }
     });
     settingsUI.loadProfile(profile);
