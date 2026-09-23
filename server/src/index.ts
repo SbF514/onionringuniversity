@@ -25,7 +25,6 @@ async function main() {
   let auth: AuthMiddleware | null = null;
   try {
     auth = new AuthMiddleware();
-    await auth.init();
     app.use('/api/auth', createAuthRouter(auth));
     console.log('Auth middleware initialized');
   } catch (err) {

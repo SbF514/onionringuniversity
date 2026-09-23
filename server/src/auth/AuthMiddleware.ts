@@ -1,31 +1,27 @@
+import jwt from 'jsonwebtoken';
+
 export interface AuthUser {
   id: string;
   email: string;
 }
 
 export class AuthMiddleware {
-  private secret: Uint8Array;
-  private jwtVerify: any;
+  private secret: string;
 
   constructor() {
     const jwtSecret = process.env.SUPABASE_JWT_SECRET;
     if (!jwtSecret) {
       throw new Error('SUPABASE_JWT_SECRET environment variable is required');
     }
-    this.secret = new TextEncoder().encode(jwtSecret);
-  }
-
-  async init(): Promise<void> {
-    const jose = await import('jose');
-    this.jwtVerify = jose.jwtVerify;
+    this.secret = jwtSecret;
   }
 
   async verifyToken(token: string): Promise<AuthUser | null> {
     try {
-      const { payload } = await this.jwtVerify(token, this.secret);
+      const payload = jwt.verify(token, this.secret) as any;
       return {
-        id: (payload.sub as string) || '',
-        email: (payload.email as string) || '',
+        id: payload.sub || '',
+        email: payload.email || '',
       };
     } catch {
       return null;
