@@ -1,5 +1,5 @@
 {
-  "name": "@school-metaverse/server",
+  "name": "@onionringuniversity/server",
   "version": "0.1.0",
   "main": "dist/index.js",
   "scripts": {

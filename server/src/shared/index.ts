@@ -1,5 +1,5 @@
 // ============================================================
-// School Metaverse - Shared Types
+// OnionRingUniversity - Shared Types
 // Core interfaces for the framework
 // ============================================================
 

@@ -7,7 +7,7 @@ export class LevelTransitionPlugin implements ServerPlugin {
     name: 'Level Transitions',
     version: '1.0.0',
     description: 'Handles player transitions between levels',
-    author: 'school-metaverse',
+    author: 'onionringuniversity',
   };
 
   async onPlayerJoin(player: PlayerState, ctx: PluginContext): Promise<void> {

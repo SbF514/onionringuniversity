@@ -1,5 +1,5 @@
 /**
- * Supabase Auth module for School Metaverse
+ * Supabase Auth module for OnionRingUniversity
  * Handles email/password auth and user profiles
  */
 class SupabaseAuth {

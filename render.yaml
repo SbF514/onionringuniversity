@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: school-metaverse-server
+    name: onionringuniversity-server
     runtime: node
     plan: free
     buildCommand: cd server && npm install --include=dev && npm run build

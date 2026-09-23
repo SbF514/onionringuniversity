@@ -1,5 +1,5 @@
 window.gameConfig = {
-  wsHost: 'school-metaverse-server.onrender.com',
+  wsHost: 'onionringuniversity-server.onrender.com',
   wsPort: '443',
   supabase: {
     url: 'https://aozdppoypjlwuhfxzipi.supabase.co',

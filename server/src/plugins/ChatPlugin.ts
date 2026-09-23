@@ -11,7 +11,7 @@ export class ChatPlugin implements ServerPlugin {
     name: 'Chat System',
     version: '1.0.0',
     description: 'Proximity-based text chat with rate limiting',
-    author: 'school-metaverse',
+    author: 'onionringuniversity',
   };
 
   private rateLimits = new Map<string, number[]>();

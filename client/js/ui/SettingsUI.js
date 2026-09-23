@@ -1,5 +1,5 @@
 /**
- * Settings UI for School Metaverse
+ * Settings UI for OnionRingUniversity
  * Handles display name, avatar color, and logout
  */
 class SettingsUI {
