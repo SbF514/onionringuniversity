@@ -1,14 +1,13 @@
-// Main entry point
 (function() {
   var game = new Game();
   var auth = window.SupabaseAuth;
   var settingsUI = new SettingsUI();
+  var settingsInitialized = false;
 
-  // Loading screen
   var loadingScreen = document.getElementById('loading-screen');
   var loginScreen = document.getElementById('login-screen');
+  var gameScreen = document.getElementById('game-screen');
 
-  // Auth form elements
   var authForm = document.getElementById('login-form');
   var emailInput = document.getElementById('email-input');
   var passwordInput = document.getElementById('password-input');
@@ -18,14 +17,29 @@
 
   var isSignUp = false;
 
-  // Initialize Supabase
   if (!auth.init()) {
     hideLoading();
     showError('Failed to initialize authentication');
     return;
   }
 
-  // Auth tab switching
+  settingsUI.init({
+    onSave: async function(updates) {
+      await auth.updateProfile(updates);
+      if (game.localPlayer) {
+        game.localPlayer.username = updates.display_name;
+        game.localPlayer.color = updates.color;
+      }
+    },
+    onLogout: async function() {
+      await auth.signOut();
+      game.stop();
+      gameScreen.style.display = 'none';
+      loginScreen.style.display = 'flex';
+    }
+  });
+  settingsInitialized = true;
+
   authTabs.forEach(function(tab) {
     tab.addEventListener('click', function() {
       authTabs.forEach(function(t) { t.classList.remove('active'); });
@@ -36,7 +50,6 @@
     });
   });
 
-  // Auth form submit
   authForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     var email = emailInput.value.trim();
@@ -70,18 +83,16 @@
     }
   });
 
-  // Check for existing session
   (async function() {
     try {
       var session = await auth.getSession();
       if (session) {
         await onLoginSuccess();
-      } else {
-        hideLoading();
       }
     } catch (err) {
-      hideLoading();
+      // session check failed
     }
+    hideLoading();
   })();
 
   function hideLoading() {
@@ -94,28 +105,18 @@
   }
 
   async function onLoginSuccess() {
-    var profile = await auth.ensureProfile();
+    var profile;
+    try {
+      profile = await auth.ensureProfile();
+    } catch (e) {
+      profile = { display_name: auth.user ? auth.user.email.split('@')[0] : 'Player', color: '#667eea' };
+    }
+
     var token = await auth.getAccessToken();
 
     loginScreen.style.display = 'none';
-    hideLoading();
-    document.getElementById('game-screen').style.display = 'block';
+    gameScreen.style.display = 'block';
 
-    settingsUI.init({
-      onSave: async function(updates) {
-        await auth.updateProfile(updates);
-        if (game.localPlayer) {
-          game.localPlayer.username = updates.display_name;
-          game.localPlayer.color = updates.color;
-        }
-      },
-      onLogout: async function() {
-        await auth.signOut();
-        game.stop();
-        document.getElementById('game-screen').style.display = 'none';
-        loginScreen.style.display = 'flex';
-      }
-    });
     settingsUI.loadProfile(profile);
 
     var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
