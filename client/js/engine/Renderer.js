@@ -76,7 +76,7 @@ class Renderer {
     if (localPlayer) {
       const screen = this.camera.worldToScreen(localPlayer.position.x, localPlayer.position.y);
       this.ctx.beginPath();
-      var radius = 200 * this.camera.zoom;
+      var radius = 80 * this.camera.zoom;
       this.ctx.arc(screen.x, screen.y, radius, 0, Math.PI * 2);
       this.ctx.strokeStyle = 'rgba(102, 126, 234, 0.15)';
       this.ctx.lineWidth = 1;
