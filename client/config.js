@@ -1,5 +1,5 @@
 window.gameConfig = {
-  wsHost: 'onionringuniversity-server.onrender.com',
+  wsHost: 'api.onionringuniversity.com',
   wsPort: '443',
   supabase: {
     url: 'https://aozdppoypjlwuhfxzipi.supabase.co',
