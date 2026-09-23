@@ -90,7 +90,7 @@ class Renderer {
     var h = size * 1.5;
     var x = screen.x - w / 2;
     var y = screen.y - h;
-    this.ctx.fillStyle = isLocal ? '#667eea' : (player.avatar && player.avatar.color ? player.avatar.color : '#e0e0e0');
+    this.ctx.fillStyle = (player.avatar && player.avatar.color) ? player.avatar.color : '#e0e0e0';
     this.ctx.beginPath();
     this.ctx.roundRect(x, y, w, h, 4 * this.camera.zoom);
     this.ctx.fill();
