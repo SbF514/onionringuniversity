@@ -14,8 +14,8 @@ class Camera {
   }
 
   setTarget(x, y) {
-    var deadX = this.screenWidth * 0.4;
-    var deadY = this.screenHeight * 0.4;
+    var deadX = this.screenWidth * 0.75;
+    var deadY = this.screenHeight * 0.75;
 
     var playerScreenX = x - this.x;
     var playerScreenY = y - this.y;
