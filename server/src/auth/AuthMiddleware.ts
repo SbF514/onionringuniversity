@@ -1,5 +1,3 @@
-import { jwtVerify } from 'jose';
-
 export interface AuthUser {
   id: string;
   email: string;
@@ -7,6 +5,7 @@ export interface AuthUser {
 
 export class AuthMiddleware {
   private secret: Uint8Array;
+  private jwtVerify: any;
 
   constructor() {
     const jwtSecret = process.env.SUPABASE_JWT_SECRET;
@@ -16,9 +15,14 @@ export class AuthMiddleware {
     this.secret = new TextEncoder().encode(jwtSecret);
   }
 
+  async init(): Promise<void> {
+    const jose = await import('jose');
+    this.jwtVerify = jose.jwtVerify;
+  }
+
   async verifyToken(token: string): Promise<AuthUser | null> {
     try {
-      const { payload } = await jwtVerify(token, this.secret);
+      const { payload } = await this.jwtVerify(token, this.secret);
       return {
         id: (payload.sub as string) || '',
         email: (payload.email as string) || '',
