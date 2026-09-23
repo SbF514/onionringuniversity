@@ -11,23 +11,24 @@ class Game {
     this.lastTick = 0;
   }
 
-  start(username, wsUrl) {
+  start(username, wsUrl, profile, token) {
     var self = this;
+    this.profile = profile || { display_name: username, color: '#667eea' };
 
-    // Show game screen
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('game-screen').style.display = 'block';
-
-    // Connect to server
-    this.ws = new WebSocketClient(wsUrl);
+    this.ws = new WebSocketClient(wsUrl, token);
 
     this.ws.on('connected', function() {
       self.setStatus('connected');
       self.chatUI.addSystemMessage('Connected to server');
-      // Send join message
+      // Send join message with profile data
       self.ws.send('player:join', {
-        username: username,
-        avatar: { spriteId: 'default', color: '#667eea', scale: 1, animations: {} },
+        username: self.profile.display_name || username,
+        avatar: {
+          spriteId: 'default',
+          color: self.profile.color || '#667eea',
+          scale: 1,
+          animations: {}
+        },
         level: 'campus-main',
       });
     });
@@ -41,9 +42,10 @@ class Game {
       self.state.setLocalPlayer(msg.payload.playerId);
       self.localPlayer = new LocalPlayer(
         msg.payload.playerId,
-        username,
+        self.profile.display_name || username,
         800, 640
       );
+      self.localPlayer.color = self.profile.color || '#667eea';
 
       // Load level tiles from server entities
       self.state.setEntities(msg.payload.entities || []);
@@ -104,6 +106,13 @@ class Game {
     });
 
     this.ws.connect();
+  }
+
+  stop() {
+    this.running = false;
+    if (this.ws) {
+      this.ws.disconnect();
+    }
   }
 
   startGameLoop() {
@@ -191,6 +200,7 @@ class Game {
       velocity: { x: this.localPlayer.vx, y: this.localPlayer.vy },
       facing: this.localPlayer.facing,
       isMoving: this.localPlayer.isMoving,
+      avatar: { color: this.localPlayer.color }
     });
   }
 

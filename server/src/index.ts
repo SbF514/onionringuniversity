@@ -5,6 +5,8 @@ import { WebSocketServer } from './network/WebSocketServer';
 import { RoomManager } from './rooms/RoomManager';
 import { LevelManager } from './levels/LevelManager';
 import { PluginManager } from './plugins/PluginManager';
+import { AuthMiddleware } from './auth/AuthMiddleware';
+import { createAuthRouter } from './auth/authRoutes';
 import { NETWORK } from './shared/index';
 
 const PORT = parseInt(process.env.PORT || '3001', 10);
@@ -18,6 +20,16 @@ async function main() {
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok', uptime: process.uptime() });
   });
+
+  // Auth middleware
+  let auth: AuthMiddleware | null = null;
+  try {
+    auth = new AuthMiddleware();
+    app.use('/api/auth', createAuthRouter(auth));
+    console.log('Auth middleware initialized');
+  } catch (err) {
+    console.warn('Auth middleware not initialized (missing SUPABASE_JWT_SECRET):', err);
+  }
 
   // Level data API
   const levelManager = new LevelManager();
@@ -42,7 +54,7 @@ async function main() {
   await pluginManager.loadPlugins();
 
   // WebSocket server
-  const wss = new WebSocketServer(server, roomManager, pluginManager);
+  const wss = new WebSocketServer(server, roomManager, pluginManager, auth);
 
   // Main tick loop
   setInterval(() => {

@@ -11,9 +11,21 @@
   <div id="login-screen">
     <div class="login-box">
       <h1>🏫 School Metaverse</h1>
-      <p>Enter your name to join the campus</p>
-      <input type="text" id="username-input" placeholder="Your name..." maxlength="20" autofocus>
-      <button id="join-btn">Join Campus</button>
+
+      <!-- Auth Form -->
+      <div id="auth-form">
+        <div id="auth-tabs">
+          <button class="auth-tab active" data-tab="signin">Sign In</button>
+          <button class="auth-tab" data-tab="signup">Sign Up</button>
+        </div>
+
+        <form id="login-form">
+          <input type="email" id="email-input" placeholder="Email" required>
+          <input type="password" id="password-input" placeholder="Password" minlength="6" required>
+          <div id="auth-error" class="error-message" style="display:none;"></div>
+          <button type="submit" id="auth-btn">Sign In</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -25,6 +37,7 @@
     <div id="hud">
       <div id="player-info">
         <span id="player-count">0 players online</span>
+        <button id="settings-btn" title="Settings">⚙️</button>
       </div>
       <div id="minimap-container">
         <canvas id="minimap" width="150" height="120"></canvas>
@@ -41,11 +54,38 @@
 
     <!-- Connection Status -->
     <div id="connection-status" class="status-connecting">Connecting...</div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" style="display:none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Settings</h2>
+          <button id="close-settings-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-group">
+            <label for="display-name-input">Display Name</label>
+            <input type="text" id="display-name-input" placeholder="Your name" maxlength="20">
+          </div>
+          <div class="setting-group">
+            <label for="avatar-color-input">Avatar Color</label>
+            <input type="color" id="avatar-color-input" value="#667eea">
+          </div>
+          <div id="settings-error" class="error-message" style="display:none;"></div>
+          <div id="settings-success" class="success-message" style="display:none;"></div>
+          <button id="save-settings-btn" class="primary-btn">Save</button>
+          <button id="logout-btn" class="secondary-btn">Logout</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="config.js"></script>
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- Scripts -->
+  <script src="js/auth/SupabaseAuth.js"></script>
   <script src="js/engine/Renderer.js"></script>
   <script src="js/engine/Camera.js"></script>
   <script src="js/network/WebSocketClient.js"></script>
@@ -53,6 +93,7 @@
   <script src="js/game/InputManager.js"></script>
   <script src="js/game/GameState.js"></script>
   <script src="js/ui/ChatUI.js"></script>
+  <script src="js/ui/SettingsUI.js"></script>
   <script src="js/game/Game.js"></script>
   <script src="js/main.js"></script>
 </body>

@@ -1,6 +1,7 @@
 class WebSocketClient {
-  constructor(url) {
+  constructor(url, token) {
     this.url = url;
+    this.token = token || null;
     this.ws = null;
     this.connected = false;
     this.playerId = null;
@@ -12,7 +13,8 @@ class WebSocketClient {
 
   connect() {
     var self = this;
-    this.ws = new WebSocket(this.url);
+    var wsUrl = this.token ? this.url + '?token=' + encodeURIComponent(this.token) : this.url;
+    this.ws = new WebSocket(wsUrl);
 
     this.ws.onopen = function() {
       self.connected = true;
@@ -81,9 +83,13 @@ class WebSocketClient {
     }
   }
 
-  close() {
+  disconnect() {
     if (this.ws) {
       this.ws.close();
     }
+  }
+
+  close() {
+    this.disconnect();
   }
 }

@@ -1,9 +1,12 @@
 import { WebSocketServer as WSServer, WebSocket } from 'ws';
 import { Server } from 'http';
+import { IncomingMessage } from 'http';
+import { URL } from 'url';
 import { RoomManager } from '../rooms/RoomManager';
 import { PluginManager } from '../plugins/PluginManager';
 import { NetworkMessage, PlayerJoinMessage, PlayerMoveMessage, ChatMessage, NETWORK } from '../shared/index';
 import { MessageRouter } from './MessageRouter';
+import { AuthMiddleware, AuthUser } from '../auth/AuthMiddleware';
 
 interface ClientSocket extends WebSocket {
   playerId?: string;
@@ -11,6 +14,7 @@ interface ClientSocket extends WebSocket {
   lastMessage: number;
   messageCount: number;
   roomId?: string;
+  user?: AuthUser;
 }
 
 export class WebSocketServer {
@@ -18,11 +22,13 @@ export class WebSocketServer {
   private roomManager: RoomManager;
   private pluginManager: PluginManager;
   private router: MessageRouter;
+  private auth: AuthMiddleware | null;
   private heartbeatInterval: NodeJS.Timeout;
 
-  constructor(server: Server, roomManager: RoomManager, pluginManager: PluginManager) {
+  constructor(server: Server, roomManager: RoomManager, pluginManager: PluginManager, auth: AuthMiddleware | null) {
     this.roomManager = roomManager;
     this.pluginManager = pluginManager;
+    this.auth = auth;
     this.router = new MessageRouter(roomManager, pluginManager);
 
     this.wss = new WSServer({ server, path: '/ws' });
@@ -46,17 +52,34 @@ export class WebSocketServer {
     this.wss.on('close', () => clearInterval(this.heartbeatInterval));
   }
 
-  private handleConnection(ws: ClientSocket, _req: unknown): void {
+  private async handleConnection(ws: ClientSocket, req: IncomingMessage): Promise<void> {
     ws.isAlive = true;
     ws.lastMessage = Date.now();
     ws.messageCount = 0;
+
+    // Try to authenticate from query param
+    if (this.auth) {
+      try {
+        const url = new URL(req.url || '/', `http://${req.headers.host}`);
+        const token = url.searchParams.get('token');
+        if (token) {
+          const user = await this.auth.verifyToken(token);
+          if (user) {
+            ws.user = user;
+            console.log(`Authenticated user: ${user.email}`);
+          }
+        }
+      } catch {
+        // Continue without auth
+      }
+    }
 
     ws.on('pong', () => { ws.isAlive = true; });
     ws.on('message', (data) => this.handleMessage(ws, data));
     ws.on('close', () => this.handleDisconnect(ws));
     ws.on('error', (err) => console.error(`WS error for ${ws.playerId}:`, err));
 
-    console.log('New connection');
+    console.log('New connection' + (ws.user ? ` (auth: ${ws.user.email})` : ''));
   }
 
   private handleMessage(ws: ClientSocket, data: unknown): void {
