@@ -1,4 +1,5 @@
 window.gameConfig = {
+  version: '0.1.1',
   wsHost: 'school-metaverse-server.onrender.com',
   wsPort: '443',
   supabase: {

@@ -23,6 +23,11 @@
     return;
   }
 
+  var versionEl = document.getElementById('version-indicator');
+  if (versionEl && window.gameConfig) {
+    versionEl.textContent = 'v' + (window.gameConfig.version || '0.0.0');
+  }
+
   settingsUI.init({
     onSave: async function(updates) {
       await auth.updateProfile(updates);

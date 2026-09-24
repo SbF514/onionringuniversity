@@ -398,6 +398,15 @@ body {
 
 .modal-body {
   padding: 20px;
+  position: relative;
+}
+
+#version-indicator {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 11px;
+  color: #555;
 }
 
 .setting-group {
