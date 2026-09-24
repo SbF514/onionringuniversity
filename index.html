@@ -1,87 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OnionRing University</title>
-  <link rel="stylesheet" href="css/landing.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnionRing University</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/landing.css">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-brand">OnionRing University</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#programs">Programs</a>
-      <a href="#campus">Campus</a>
-      <a href="otherworld/" class="nav-cta">Enter Otherworld</a>
-    </div>
-  </nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Welcome to OnionRing University</h1>
-      <p class="hero-subtitle">Where Learning Meets Adventure</p>
-      <p class="hero-desc">Step into a world where education comes alive. Explore our virtual campus, connect with fellow students, and discover knowledge in entirely new ways.</p>
-      <a href="otherworld/" class="btn-primary">Enter the Otherworld</a>
+    <!--- header --->
+    
+  <section class="header">
+    <nav>
+        <a href="index.html"><img src="images/logo.png" alt="OnionRing University"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#programs">PROGRAMS</a></li>
+                <li><a href="#campus">CAMPUS</a></li>
+                <li><a href="otherworld/" class="nav-cta">ENTER OTHERWORLD</a></li>
+            </ul>
+        </div>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+    </nav>
+
+    <div class="text-box">
+        <h1>OnionRing University</h1>
+        <p>Where Learning Meets Adventure. Step into a world where education comes alive. Explore our virtual campus, connect with fellow students, and discover knowledge in entirely new ways.</p>
+        <a href="otherworld/" class="hero-btn">Enter the Otherworld</a>
     </div>
   </section>
 
-  <section id="about" class="section">
-    <div class="container">
-      <h2>About Our University</h2>
-      <p>OnionRing University is a pioneering institution at the intersection of technology and education. We believe that learning should be immersive, engaging, and accessible to everyone.</p>
-      <div class="stats">
-        <div class="stat">
-          <span class="stat-number">500+</span>
-          <span class="stat-label">Students</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">50+</span>
-          <span class="stat-label">Courses</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">24/7</span>
-          <span class="stat-label">Virtual Campus</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<!---- About ---->
+ 
+<section id="about" class="about">
+    <h1>About Our University</h1>
+    <p>OnionRing University is a pioneering institution at the intersection of technology and education. We believe that learning should be immersive, engaging, and accessible to everyone.</p>
 
-  <section id="programs" class="section alt">
-    <div class="container">
-      <h2>Our Programs</h2>
-      <div class="programs-grid">
-        <div class="program-card">
-          <div class="program-icon">Computer Science</div>
-          <h3>Computer Science</h3>
-          <p>Master the fundamentals of programming, algorithms, and systems design.</p>
+    <div class="row">
+        <div class="about-col">
+            <img src="images/about.jpg" alt="About OnionRing University">
         </div>
-        <div class="program-card">
-          <div class="program-icon">Digital Arts</div>
-          <h3>Digital Arts</h3>
-          <p>Explore creative expression through digital media and interactive design.</p>
+        <div class="about-col">
+            <h3>Our Mission</h3>
+            <p>We're building the future of education through immersive virtual experiences. Our campus brings learning to life in ways traditional classrooms never could.</p>
+            <h3>Our Vision</h3>
+            <p>To create a global community where students can learn, collaborate, and grow together in an engaging virtual environment that feels as real as being there.</p>
         </div>
-        <div class="program-card">
-          <div class="program-icon">Game Design</div>
-          <h3>Game Design</h3>
-          <p>Learn to create immersive experiences that captivate and inspire.</p>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
-  <section id="campus" class="section">
-    <div class="container">
-      <h2>Visit Our Campus</h2>
-      <p>Our virtual campus is always open. Walk through the halls, meet other students, and experience university life in the Otherworld.</p>
-      <a href="otherworld/" class="btn-primary">Enter the Otherworld</a>
-    </div>
-  </section>
+<!--- Programs --->
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2026 OnionRing University. All rights reserved.</p>
+<section id="programs" class="programs">
+    <h1>Our Programs</h1>
+    <p>Explore our diverse range of programs designed to prepare you for the future.</p>
+
+    <div class="row">
+        <div class="programs-col">
+            <img src="images/library.png" alt="Computer Science">
+            <h3>Computer Science</h3>
+            <p>Master the fundamentals of programming, algorithms, and systems design in our state-of-the-art virtual labs.</p>
+        </div>
+        <div class="programs-col">
+            <img src="images/basketball.png" alt="Digital Arts">
+            <h3>Digital Arts</h3>
+            <p>Explore creative expression through digital media and interactive design in our creative studios.</p>
+        </div>
+        <div class="programs-col">
+            <img src="images/cafeteria.png" alt="Game Design">
+            <h3>Game Design</h3>
+            <p>Learn to create immersive experiences that captivate and inspire players around the world.</p>
+        </div>
     </div>
-  </footer>
+
+</section>
+
+<!--- Campus --->
+
+<section id="campus" class="campus">
+    <h1>Our Virtual Campus</h1>
+    <p>Step into the Otherworld and experience university life like never before.</p>
+
+    <div class="row">
+        <div class="campus-col">
+            <img src="images/london.png" alt="The Commons">
+            <div class="layer">
+                <h3>THE COMMONS</h3>
+            </div>
+        </div>
+        <div class="campus-col">
+            <img src="images/newyork.png" alt="Study Hall">
+            <div class="layer">
+                <h3>STUDY HALL</h3>
+            </div>
+        </div>
+        <div class="campus-col">
+            <img src="images/washington.png" alt="The Quad">
+            <div class="layer">
+                <h3>THE QUAD</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--- Testimonials --->
+
+<section class="testimonials">
+    <h1>What Our Students Say</h1>
+    <p>Hear from our community of learners.</p>
+    <div class="row">
+        <div class="testimonial-col">
+            <img src="images/user1.jpg" alt="Student">
+            <div>
+                <p>"OnionRing University completely changed how I think about online learning. The virtual campus feels so real, I forget I'm learning from home!"</p>
+                <h3>Alex Chen</h3>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+            </div>
+        </div>
+        <div class="testimonial-col">
+            <img src="images/user2.jpg" alt="Student">
+            <div>
+                <p>"The interactive programs and collaborative spaces make this university experience truly unique. Best decision I ever made."</p>
+                <h3>Maria Rodriguez</h3>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star-half-stroke"></i>
+            </div>
+        </div>
+    </div>
+  
+</section>
+
+<!--- Call To Action --->
+
+<section class="cta">
+    <h1>Ready to Start Your Journey?<br>Enter the Otherworld Today</h1>
+    <a href="otherworld/" class="hero-btn">ENTER OTHERWORLD</a>
+
+</section>
+
+<!--- footer--->
+
+<section class="footer">
+    <h4>About OnionRing University</h4>
+    <p>A pioneering institution at the intersection of technology and education. Building the future of immersive learning, one student at a time.</p>
+    <div class="icons">
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-discord"></i>
+    </div>
+    <p>&copy; 2026 OnionRing University. All rights reserved.</p>
+
+</section>
+
+
+  <!---- Javascript for Toggle Menu ---->
+  <script>
+
+    var nakLinks = document.getElementById("navLinks");
+    function showMenu(){
+        nakLinks.style.right = "0";
+    }
+    function hideMenu(){
+        nakLinks.style.right = "-200px";
+    }
+
+  </script>
+
 </body>
 </html>
