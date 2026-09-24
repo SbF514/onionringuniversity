@@ -6,7 +6,7 @@ class Camera {
     this.targetY = 0;
     this.zoom = 1;
     this.targetZoom = 1;
-    this.smoothing = 0.08;
+    this.smoothing = 1;
     this.minZoom = 0.5;
     this.maxZoom = 2;
     this.screenWidth = 800;
@@ -14,23 +14,8 @@ class Camera {
   }
 
   setTarget(x, y) {
-    var deadX = this.screenWidth * 0.75;
-    var deadY = this.screenHeight * 0.75;
-
-    var playerScreenX = x - this.x;
-    var playerScreenY = y - this.y;
-
-    if (playerScreenX < deadX) {
-      this.targetX = x - deadX;
-    } else if (playerScreenX > this.screenWidth - deadX) {
-      this.targetX = x - this.screenWidth + deadX;
-    }
-
-    if (playerScreenY < deadY) {
-      this.targetY = y - deadY;
-    } else if (playerScreenY > this.screenHeight - deadY) {
-      this.targetY = y - this.screenHeight + deadY;
-    }
+    this.targetX = x - this.screenWidth / 2;
+    this.targetY = y - this.screenHeight / 2;
   }
 
   setZoom(z) {
