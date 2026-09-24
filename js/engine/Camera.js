@@ -15,7 +15,7 @@ class Camera {
 
   setTarget(x, y) {
     this.targetX = x - this.screenWidth / 2;
-    this.targetY = y - this.screenHeight / 2;
+    this.targetY = y - this.screenHeight / 2 + 24;
   }
 
   setZoom(z) {
