@@ -32,6 +32,13 @@ nav img {
     width: 150px;
 }
 
+.logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
 .nav-links {
     flex: 1;
     text-align: right;
